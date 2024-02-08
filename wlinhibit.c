@@ -4,10 +4,12 @@
 #include <string.h>
 
 #include <idle-inhibit-unstable-v1-client-protocol.h>
+#include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
 struct wl_compositor *compositor;
 struct zwp_idle_inhibit_manager_v1 *idle_inhibit_manager;
+struct wl_surface *surface;
 struct zwp_idle_inhibitor_v1 *idle_inhibitor;
 
 void registry_global_handler(void *data, struct wl_registry *registry,
@@ -31,6 +33,7 @@ void registry_global_remove_handler(void *data, struct wl_registry *registry,
 void shutdown() {
     // destroy the inhibitor on process exit
     zwp_idle_inhibitor_v1_destroy(idle_inhibitor);
+    wl_surface_destroy(surface);
     exit(EXIT_SUCCESS);
 }
 
@@ -67,7 +70,7 @@ int main(void) {
         return 1;
     }
 
-    struct wl_surface *surface = wl_compositor_create_surface(compositor);
+    surface = wl_compositor_create_surface(compositor);
 
     if (!surface) {
         printf("unable to create surface");
@@ -83,4 +86,6 @@ int main(void) {
     while (1) {
         wl_display_dispatch(display);
     }
+
+    shutdown();
 }
