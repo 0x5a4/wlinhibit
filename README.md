@@ -1,6 +1,7 @@
 # wlinhibit
 
-**Notice:** As of hyprland 0.40, [this](https://github.com/hyprwm/Hyprland/issues/5878) issue breaks this app.
+**Notice:** In hyprland 0.40, [this](https://github.com/hyprwm/Hyprland/issues/5878) issue breaks this app.
+Fixed in later versions.
 
 `wlinhibit` is an extremely simple program to prevent your wayland compositor from going idle.  
 if it runs idle inhibit is active, if not not. its that simple.
