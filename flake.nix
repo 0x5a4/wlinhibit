@@ -2,7 +2,7 @@
   description = "simple, stupid idle inhibitor for wayland";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -15,34 +15,41 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
       in rec {
-        devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             clang
-            meson
-            pkg-config
-            ninja
             wayland
             wayland-protocols
+            meson
+            ninja
+            pkg-config
+            wayland-scanner
           ];
         };
 
-        defaultPackage = pkgs.stdenv.mkDerivation {
+        packages.default = pkgs.stdenv.mkDerivation {
           name = "wlinhibit";
           src = self;
-
-          nativeBuildInputs = with pkgs; [
-            clang
-            meson
-            pkg-config
-            ninja
+          
+          buildInputs = with pkgs; [
             wayland
             wayland-protocols
           ];
+
+          strictDeps = true;
+
+          nativeBuildInputs = with pkgs; [
+            meson
+            ninja
+            pkg-config
+            wayland-scanner
+          ];
         };
 
-        defaultApp = flake-utils.lib.mkApp {
-          drv = defaultPackage;
-          exePath = "/bin/wlinhibit";
+        checks.build = packages.default;
+
+        apps.default = flake-utils.lib.mkApp {
+          drv = packages.default;
         };
       }
     );
