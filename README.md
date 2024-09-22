@@ -10,9 +10,10 @@ _(Your compositor needs to support idle-inhibit-unstable-v1.xml, most of them do
 
 ## Installation
 
-Available in nixpkgs unstable!
-
-Also available in the [Arch Linux AUR](https://aur.archlinux.org/packages/wlinhibit). 
+Get it from:
+- [Nixpkgs Unstable](https://search.nixos.org/packages?channel=unstable&show=wlinhibit)
+- [My Gentoo Overlay](https://github.com/0x5a4/ruhtra/tree/main/app-misc/wlinhibit)
+- [The AUR](https://aur.archlinux.org/packages/wlinhibit)
 
 ## Usage
 
