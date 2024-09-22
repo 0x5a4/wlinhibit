@@ -12,6 +12,8 @@ _(Your compositor needs to support idle-inhibit-unstable-v1.xml, most of them do
 
 Available in nixpkgs unstable!
 
+Also available in the [Arch Linux AUR](https://aur.archlinux.org/packages/wlinhibit). 
+
 ## Usage
 
 You will probably want to setup a keybind that runs something like
