@@ -30,7 +30,7 @@ void registry_global_remove_handler(void *data, struct wl_registry *registry,
     // care?
 }
 
-void shutdown() {
+void shutdown(int sig) {
     // destroy the inhibitor on process exit
     zwp_idle_inhibitor_v1_destroy(idle_inhibitor);
     wl_surface_destroy(surface);
@@ -87,5 +87,5 @@ int main(void) {
         wl_display_dispatch(display);
     }
 
-    shutdown();
+    shutdown(0);
 }
