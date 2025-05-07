@@ -28,7 +28,8 @@
         };
 
         packages.default = pkgs.stdenv.mkDerivation {
-          name = "wlinhibit";
+          pname = "wlinhibit";
+          version = "0.1.2";
           src = self;
           
           buildInputs = with pkgs; [
